@@ -16,7 +16,7 @@ module AdventDash =
 
     //the context
     let interval = 1000
-    let context : IHubContext = GlobalHost.ConnectionManager.GetHubContext<metricsHub>()
+    let context = GlobalHost.ConnectionManager.GetHubContext<metricsHub, IMetricsHub>()
 
     ///get the processs instance name via provided process id
     let getProcessInstanceName (pid: int) =
@@ -47,7 +47,7 @@ module AdventDash =
         ]
 
     ///grab performance metric values and map them to our over the wire F# perfModel
-    let metricsWorkflow (context : IHubContext) = async {
+    let metricsWorkflow (context : IHubContext<IMetricsHub>) = async {
         let mappedCounters = serviceCounters
                                 |> Seq.map(fun x ->
                                     {
@@ -64,7 +64,7 @@ module AdventDash =
         |> Seq.iter(fun perfModel ->
             printfn "CategoryName: %s CounterName:%s Value:%A" perfModel.CategoryName perfModel.CounterName perfModel.Value
         )
-        context.Clients.All?broadcastPerformance(mappedCounters);
+        context.Clients.All.BroadcastPerformance mappedCounters;
     }
 
     ///lets recurse infitly to broadcast our metrics 

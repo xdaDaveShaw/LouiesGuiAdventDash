@@ -7,10 +7,13 @@ open Microsoft.Owin.Hosting
 open Microsoft.AspNet.SignalR.Owin
 open PerfModel
 
+    type IMetricsHub = 
+        abstract member AddMessage: string -> unit
+        abstract member BroadcastPerformance: PerfModel seq -> unit
 
     [<HubName("metricsHub")>]
     type metricsHub() = 
-        inherit Hub()
+        inherit Hub<IMetricsHub>()
 
         //if we were intrested in seeing who is connecting
         //or doing something on a new connection this would be the place
@@ -19,9 +22,9 @@ open PerfModel
 
         // A function that can be invoked by any client since signalr uses web sockets for two way communication.
         member public x.SendMessage(message : string) : unit =
-            base.Clients.All?addMessage (message)
+            base.Clients.All.AddMessage message
 
 
                 // A function that can be invoked by any client since signalr uses web sockets for two way communication.
         member public x.BroadcastPerformance(perfromance : PerfModel seq) : unit =
-            base.Clients.All?broadcastPerformance (perfromance)
+            base.Clients.All.BroadcastPerformance perfromance
