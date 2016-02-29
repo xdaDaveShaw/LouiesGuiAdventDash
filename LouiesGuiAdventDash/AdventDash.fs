@@ -4,7 +4,6 @@ module AdventDash =
     open System
     open System.Threading
     open Owin
-    open FSharp.Interop.Dynamic
     open Microsoft.AspNet.SignalR
     open Microsoft.Owin.Hosting
     open Microsoft.Owin.Cors

@@ -7,14 +7,11 @@
 #r "Debug\Microsoft.Owin.dll"
 #r "Debug\Microsoft.Owin.Hosting.dll"
 #r "Debug\Owin.dll"
-#r "Debug\FSharp.Interop.Dynamic.dll"
-#r "Debug\Dynamitey.dll"
 
 #r "Debug\LouiesGuiAdventDash.dll"
 
 open Owin
 open System
-open FSharp.Interop.Dynamic
 open Microsoft.AspNet.SignalR
 open Microsoft.AspNet.SignalR.Owin
 open Microsoft.Owin.Hosting

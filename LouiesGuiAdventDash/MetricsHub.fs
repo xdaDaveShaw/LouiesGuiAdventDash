@@ -5,7 +5,6 @@ open Microsoft.AspNet.SignalR
 open Microsoft.AspNet.SignalR.Hubs
 open Microsoft.Owin.Hosting
 open Microsoft.AspNet.SignalR.Owin
-open FSharp.Interop.Dynamic
 open PerfModel
 
 
